@@ -12,6 +12,7 @@ pipeline {
                 sh "terraform fmt"
                 sh "terraform validate"
                 sh "terraform apply"
+                sh "yes"
                 
             }
         }    
