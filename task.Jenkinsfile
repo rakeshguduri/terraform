@@ -4,7 +4,7 @@ pipeline {
         stage('checkout') {
             steps {
                 git url: 'https://github.com/rakeshguduri/terraform.git'
-                    branch: "main"
+                    
             }
         }
         stage('init') {
@@ -17,11 +17,7 @@ pipeline {
                 sh 'terraform validate'
             }
         }
-        stage('plan') {
-            steps {
-                sh 'terraform plan'
-            }
-        }
+
         stage('action') {
             steps {
                 sh 'terraform $action --auto-approve'
