@@ -1,21 +1,30 @@
 pipeline {
     agent any
     stages {
-        stage ("Clone") {
+        stage('checkout') {
             steps {
-                git branch: "main", url: "https://github.com/rakeshguduri/terraform.git"
+                git 'https://github.com/rakeshguduri/terraform.git'
             }
-        }    
-        stage("action") {
+        }
+        stage('init') {
             steps {
-                sh "terraform init"
-                sh "terraform fmt"
-                sh "terraform validate"
-                sh "terraform apply"
-                sh "yes"
-                
+                sh 'terraform init'
             }
-        }    
-        
+        }
+        stage('validate') {
+            steps {
+                sh 'terraform validate'
+            }
+        }
+        stage('plan') {
+            steps {
+                sh 'terraform plan'
+            }
+        }
+        stage('action') {
+            steps {
+                sh 'terraform $action --auto-approve'
+            }
+        }
     }
 }
