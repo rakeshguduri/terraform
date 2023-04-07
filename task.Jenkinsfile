@@ -1,12 +1,7 @@
 pipeline {
     agent any
     stages {
-        stage('checkout') {
-            steps {
-                git url: 'https://github.com/rakeshguduri/terraform.git'
-                    
-            }
-        }
+        
         stage('init') {
             steps {
                 sh 'terraform init'
@@ -20,7 +15,7 @@ pipeline {
 
         stage('action') {
             steps {
-                sh 'terraform $action --auto-approve'
+                sh 'terraform apply'
             }
         }
     }
